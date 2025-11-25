@@ -81,6 +81,8 @@ def generate_notes(info: dict, output_dir: Path):
             chap_title = chap.get('title', f"Chapter {i}")
             md_content.append(f"- [{chap_title}]({title}.mp4#t={int(start)}s)\n")  # Relative link
         md_content.append("\n")
+    else:
+        md_content.append("No chapters detected — full video notes.\n\n")
     
     md_content.append("## Full Transcript/Subtitles\n*(Add auto-gen later)*")
     
@@ -97,15 +99,23 @@ def watch_channel(channel_rss: str, output_dir: Path, interval: int = 300):  # 5
     seen = set()
     
     while True:
-        feed = feedparser.parse(channel_rss)
-        for entry in feed.entries:
-            vid_id = entry.id  # Or link
-            if vid_id not in seen:
-                logger.info(f"New video: {entry.title}")
-                download_and_extract(entry.link, output_dir)  # Download URL from entry.link
-                seen.add(vid_id)
-        
-        time.sleep(interval)
+        try:
+            feed = feedparser.parse(channel_rss)
+            if feed.bozo:  # Parse error
+                logger.warning("RSS parse failed — skipping poll")
+                return
+            
+            for entry in feed.entries:
+                vid_id = entry.id  # Or link
+                if vid_id not in seen:
+                    logger.info(f"New video: {entry.title}")
+                    download_and_extract(entry.link, output_dir)  # Download URL from entry.link
+                    seen.add(vid_id)
+            
+            time.sleep(interval)
+        except Exception as e:
+            logger.error(f"Watch poll error: {e}")
+            time.sleep(interval)  # Continue after error
 
 def main():
     parser = argparse.ArgumentParser(

@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yt-notes"
+version = "0.1.0"
+readme = "README.md"
+dependencies = ["yt-dlp", "rich", "loguru", "feedparser"]
+
+[project.scripts]
+yt-notes = "yt_notes.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["yt_notes*"]
+
+[tool.setuptools.package-dir]
+"" = "."
+"yt_notes" = "yt-notes"
+
