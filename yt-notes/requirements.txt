@@ -1,0 +1,5 @@
+yt-dlp>=2023.12.30
+loguru>=0.7.2
+rich>=13.7.0
+feedparser>=6.0.10
+
