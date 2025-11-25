@@ -68,7 +68,8 @@ See `yt-notes --help` for more options.
 
 ## Demo
 
-<iframe src="https://www.loom.com/embed/YOUR_LOOM_ID" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: relative; top: 0; left: 0; width: 100%; max-width: 700px; height: 450px;"></iframe>
+<iframe src="https://www.loom.com/embed/e352c38ea8e244c093d81f7d300c8d1f" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: relative; top: 0; left: 0; width: 100%; max-with: 700px: height: 450px;"></iframe>
+
 
 ## Development
 
